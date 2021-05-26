@@ -17,11 +17,9 @@
 
 <script>
 import axios from 'axios';
-import Header from './components/Header.vue'
-import Main from './components/Main.vue'
-import Default from './components/Default.vue'
-
-
+import Header from './components/Header.vue';
+import Main from './components/Main.vue';
+import Default from './components/Default.vue';
 
 export default {
   name: 'App',
