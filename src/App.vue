@@ -40,8 +40,8 @@ export default {
     }
   },
   methods:{
-    searchingMovie(apiQuery){
-      this.apiQuery = apiQuery;
+    searchingMovie(text){
+      this.apiQuery = text;
       axios.get(this.apiURL,{
         params:{
           api_key: this.apiKey,

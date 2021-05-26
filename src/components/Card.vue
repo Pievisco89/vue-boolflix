@@ -1,6 +1,6 @@
 <template>
   <ul class="m-1">
-    <li class="text-center">Film:</li>
+    <li>Film:</li>
     <li>Titolo: <span>{{movie.title}} </span></li>
     <li>Titolo originale: <span>{{movie.original_title}}</span> </li>
     <li>Lingua originale: <span> {{movie.original_language}} </span></li>
