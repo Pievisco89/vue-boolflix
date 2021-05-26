@@ -42,6 +42,12 @@ export default {
   methods:{
     searchingMovie(text){
       this.apiQuery = text;
+      this.getData();
+      if(this.apiQuery === ''){
+        this.loading = true;
+      }
+    },
+    getData(){
       axios.get(this.apiURL,{
         params:{
           api_key: this.apiKey,
@@ -56,7 +62,6 @@ export default {
       .catch(err => {
         console.log(err);
       })
-      
     }
     
   }
