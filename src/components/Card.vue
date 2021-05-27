@@ -2,7 +2,17 @@
   <ul class="m-1 list-group">
     <li class="list-group-item">Titolo: <span>{{movie.title || movie.name}}</span></li>
     <li class="list-group-item">Titolo originale: <span>{{movie.original_title || movie.original_name}}</span> </li>
-    <li class="list-group-item">Lingua originale: <!-- {{movie.original_language}}   --><CountryFlag :country="getFlag()" size="normal" /> </li>
+    <li 
+      v-if="movie.original_language == 'it'" 
+      class="list-group-item">Lingua originale: <CountryFlag country="it" size="normal" /> 
+    </li>
+    <li 
+      v-if="movie.original_language == 'en'" 
+      class="list-group-item">Lingua originale: <CountryFlag country="gb" size="normal" /> 
+    </li>
+    <li 
+      v-if="movie.original_language !== 'en' && movie.original_language !== 'it'" class="list-group-item">Lingua originale: {{movie.original_language}} 
+    </li>
     <li class="list-group-item">Media voti: <span>{{movie.vote_average}}</span> </li>  
   </ul>
   
@@ -13,6 +23,11 @@ import CountryFlag from 'vue-country-flag'
 
 export default {
   name: 'Card',
+  data(){
+    return{
+
+  }
+  },
   components:{
     CountryFlag
   },
@@ -20,14 +35,7 @@ export default {
     movie: Object
   },
   methods:{
-    getFlag(){
-      if(this.movie.original_language === 'it'){
-        return 'it'
-      } else if (this.movie.original_language === 'en'){
-        return 'gb'
-      }
-        return this.movie.original_language
-    }
+   
   }
 }
 </script>
