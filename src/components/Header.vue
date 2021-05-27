@@ -4,17 +4,31 @@
     <h1>BoolFlix</h1>
 
     <div>
+      
       <input 
-        type="text" 
-        placeholder="Cerca un film"
-        v-model="apiQuery" 
-        @keyup.enter="getMovie()" 
+        v-model.trim="apiQuery"
+        type="text"
       >
 
       <button
-        @click="getMovie()"
-      >Cerca</button>
+        @click="$emit('startSearch', {text:apiQuery, type:'movie'})"
+      >
+        Cerca Film
+      </button>
 
+      <button
+        @click="$emit('startSearch', {text:apiQuery, type:'tv'})"
+      >
+        Cerca Serie-tv
+      </button>
+
+      <button
+        @click="$emit('startSearch', {text:apiQuery, type:'all'})"
+      >
+        Cerca Tutto
+      </button>
+
+      
     </div>
 
   </header>
@@ -28,12 +42,7 @@ export default {
       apiQuery: ''
     }
   },
-  methods:{
-    getMovie(){
-      this.$emit('searchMovie', this.apiQuery);
-      this.apiQuery = '';
-    }
-  }
+
 }
 </script>
 
@@ -48,6 +57,10 @@ export default {
       margin-right: 1.5rem;
       padding: 0 1rem;
       outline: none;
+    }
+    button{
+      text-transform: uppercase;
+      margin-left: 0.5rem;
     }
   }
 </style>

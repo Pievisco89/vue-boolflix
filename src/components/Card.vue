@@ -1,11 +1,11 @@
 <template>
-  <ul class="m-1">
-    <li>Film:</li>
-    <li>Titolo: <span>{{movie.title}} </span></li>
-    <li>Titolo originale: <span>{{movie.original_title}}</span> </li>
-    <li>Lingua originale: <span> {{movie.original_language}} </span></li>
-    <li>Media voti: <span>{{movie.vote_average}}</span> </li>  
+  <ul class="m-1 list-group">
+    <li class="list-group-item">Titolo: <span>{{movie.title || movie.name}}</span></li>
+    <li class="list-group-item">Titolo originale: <span>{{movie.original_title || movie.original_name}}</span> </li>
+    <li class="list-group-item">Lingua originale: <span> {{movie.original_language}} </span></li>
+    <li class="list-group-item">Media voti: <span>{{movie.vote_average}}</span> </li>  
   </ul>
+  
 </template>
 
 <script>
@@ -13,6 +13,11 @@ export default {
   name: 'Card',
   props:{
     movie: Object
+  },
+  data(){
+    return{
+      
+    }
   }
 }
 </script>
@@ -22,7 +27,6 @@ ul{
   width: calc(100% / 4);
   min-height: 200px;
   list-style: none;
-  background-color: rgb(221, 199, 199);
   border-radius: 2rem;
   padding-top: 1rem;
   li{

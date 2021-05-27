@@ -1,6 +1,6 @@
 <template>
   <section class="d-flex flex-column justify-content-center align-items-center">
-    <h1>Cerca un film </h1>
+    <h1>Inizia la tua ricerca! </h1>
     <div class="lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
   </section>
 </template>
