@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="text-center">
     <Header 
       @startSearch="startSearch"
     />
@@ -98,5 +98,6 @@ export default {
 
 <style lang="scss">
   @import './assets/style/general.scss';
+  
 
 </style>
