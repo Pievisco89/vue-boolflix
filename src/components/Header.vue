@@ -3,45 +3,58 @@
 
     <h1>BoolFlix</h1>
 
-    <div>
+    <div class="d-flex align-items-center">
       
       <input 
         v-model.trim="apiQuery"
         type="text"
+        placeholder="Cerca film o serie-tv..."
       >
 
       <button
-        @click="$emit('startSearch', {text:apiQuery, type:'movie'})"
+        class="btn btn-secondary"
+        @click="getStartSearch('movie')"
       >
         Cerca Film
       </button>
 
       <button
-        @click="$emit('startSearch', {text:apiQuery, type:'tv'})"
+        class="btn btn-secondary"
+        @click="getStartSearch('tv')"
       >
         Cerca Serie-tv
       </button>
 
       <button
-        @click="$emit('startSearch', {text:apiQuery, type:'all'})"
+        class="btn btn-secondary"
+        @click=" getStartSearch('all')"
       >
         Cerca Tutto
       </button>
 
-      
     </div>
 
   </header>
 </template>
 
 <script>
+
+
 export default {
   name: 'Header',
+  components:{
+    
+  },
   data(){
-    return{
+    return{ 
       apiQuery: ''
     }
   },
+  methods:{
+    getStartSearch(type){
+      this.$emit('startSearch', {text:this.apiQuery, type:type});      
+    }
+  }
 
 }
 </script>
@@ -49,7 +62,7 @@ export default {
 <style lang="scss" scoped>
   header{
     height: 70px;
-    background: red;
+    background: rgb(0, 0, 0);
     h1{
       text-transform: uppercase;
     }
@@ -59,6 +72,7 @@ export default {
       outline: none;
     }
     button{
+      min-width: 150px;
       text-transform: uppercase;
       margin-left: 0.5rem;
     }

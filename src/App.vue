@@ -5,8 +5,10 @@
     />
 
     <h1
+      class="m-5"
       v-if="resultList.movie.length === 0 && resultList.movie.length === 0"
-    >Nessun risultato trovato</h1> <!-- da sistemare -->
+    >Nessun risultato trovato</h1>
+
 
     <Main
       v-if="resultList.movie.length > 0"
@@ -21,9 +23,8 @@
     />
 
     <!-- <Default 
-      v-else
+      v-if="loading"
     /> -->
-
 
   </div>
 </template>
@@ -34,16 +35,18 @@ import Header from './components/Header.vue';
 import Main from './components/Main.vue';
 //import Default from './components/Default.vue';
 
+
 export default {
   name: 'App',
   components: {
     Header,
     Main,
-    /* Default */
+    //Default
+
   },
   data(){
     return{
-      loading: true,    
+      //loading: true,    
       apiURL: 'https://api.themoviedb.org/3/search/',
       apiKey: 'fd1b976883e42bd0bfd6acabdc7587a9',
       apiQuery: '',
@@ -99,5 +102,8 @@ export default {
 <style lang="scss">
   @import './assets/style/general.scss';
   
+  h1{
+    color: rgb(255, 0, 0);
+  }
 
 </style>

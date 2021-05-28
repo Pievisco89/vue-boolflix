@@ -4,8 +4,8 @@
     <div class="flip-card-inner">
       <div class="flip-card-front">
         <img 
-          :src="'https://image.tmdb.org/t/p/w300'+ movie.poster_path" :alt="movie.title || movie.name" 
-        >
+          :src="getImg(movie.poster_path)" :alt="movie.title || movie.name" 
+        >   
       </div>
       <div class="flip-card-back">
         <ul class="m-1 list-group">
@@ -46,7 +46,7 @@ export default {
   name: 'Card',
   data(){
     return{
-
+      baseURL: 'https://image.tmdb.org/t/p/w342/',
   }
   },
   components:{
@@ -56,6 +56,10 @@ export default {
     movie: Object
   },
   methods:{
+    getImg(img_path){
+      let imgURL = this.baseURL+img_path;
+      return imgURL;
+    }
    
   }
 }
@@ -95,7 +99,7 @@ export default {
   }
 
   .flip-card-front {
-    background-color: #bbb;
+    background-color: #bf8484;
     color: black;
 
     img{
