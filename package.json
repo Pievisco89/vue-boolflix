@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@fontsource/roboto": "^4.4.2",
-    "@fortawesome/fontawesome-free": "^5.15.3",
     "axios": "^0.21.1",
     "bootstrap": "^5.0.1",
     "core-js": "^3.6.5",
