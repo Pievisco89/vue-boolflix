@@ -1,5 +1,8 @@
-@import '~bootstrap/scss/bootstrap.scss';
+@import '~bootstrap/scss/bootstrap.scss'; //carico bootsrap
+
+@import '~@fontsource/roboto/index.css'; //carico font roboto
 
 body{
   background-color: rgb(71, 69, 69);
+  font-family: "Roboto", sans-serif;
 }

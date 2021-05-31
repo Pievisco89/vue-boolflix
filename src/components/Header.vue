@@ -1,37 +1,43 @@
 <template>
-  <header class="d-flex align-items-center justify-content-around">
+  <header class="d-flex align-items-center">
 
-    <h1>BoolFlix</h1>
-
-    <div class="d-flex align-items-center">
+    <div class="d-flex justify-content-evenly align-items-center">
+      <h1>BoolFlix</h1>
       
       <input 
+        class="form-control"
         v-model.trim="apiQuery"
         type="text"
         placeholder="Cerca film o serie-tv..."
       >
 
       <button
-        class="btn btn-secondary"
+        class="btn btn-secondary btn-sm small"
         @click="getStartSearch('movie')"
       >
-        Cerca Film
+        Film
       </button>
 
       <button
-        class="btn btn-secondary"
+        class="btn btn-secondary btn-sm ms-1 small"
         @click="getStartSearch('tv')"
       >
-        Cerca Serie-tv
+        Serie-tv
       </button>
 
       <button
-        class="btn btn-secondary"
+        class="btn btn-secondary btn-sm ms-1 small"
         @click=" getStartSearch('all')"
       >
         Cerca Tutto
       </button>
 
+      <button
+        class="btn btn-secondary btn-sm ms-1"
+        @click=" getStartSearch('all')"
+      >
+        Cerca
+      </button>
     </div>
 
   </header>
@@ -42,9 +48,6 @@
 
 export default {
   name: 'Header',
-  components:{
-    
-  },
   data(){
     return{ 
       apiQuery: ''
@@ -63,18 +66,52 @@ export default {
   header{
     height: 70px;
     background: rgb(0, 0, 0);
-    h1{
-      text-transform: uppercase;
+    div{
+      width: 90%;
+      margin: 0 auto;
+      h1{
+        text-transform: uppercase;
+      }
+      input{
+        margin: 0 1.25rem;
+        padding: 0 1rem;
+        outline: none;
+        &::placeholder {
+          font-size: 0.85rem;
+        }
+      }
+      button{
+        min-width: 100px;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        
+      }
     }
-    input{
-      margin-right: 1.5rem;
-      padding: 0 1rem;
-      outline: none;
+
+  }
+  
+  //gestisco input e display bottoni sotto 800px
+  @media screen and(max-width: 800px){
+    div{
+      width: 100%;
+      h1{
+        font-size: 1.45rem;
+      }
+      input{
+        min-width: 150px;
+      }
+      .small{
+        display: none;
+      } 
+      & button:last-child{
+        display: visible;
+      }    
     }
-    button{
-      min-width: 150px;
-      text-transform: uppercase;
-      margin-left: 0.5rem;
+  }
+  
+  @media screen and(min-width: 801px){
+    div button:last-child{
+    display: none;
     }
   }
 </style>

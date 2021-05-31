@@ -1,7 +1,9 @@
 <template>
   
-  <div class="flip-card">
+  <div class="flip-card"> 
+
     <div class="flip-card-inner">
+
       <div class="flip-card-front">
         <img 
           :src="getImg(movie.poster_path)" :alt="movie.title || movie.name" 
@@ -15,32 +17,59 @@
           <li><span>Titolo originale:</span> <span>{{movie.original_title || movie.original_name}}</span> </li>
           <li 
             v-if="movie.original_language == 'it'" 
-            ><span>Lingua originale:</span> <CountryFlag country="it" size="normal" /> 
+            ><span class="me-2">Lingua originale:</span> <CountryFlag country="it" size="normal" /> 
           </li>
           <li 
             v-if="movie.original_language == 'en'" 
-            ><span>Lingua originale:</span> <CountryFlag country="gb" size="normal" /> 
+            ><span class="me-2">Lingua originale:</span> <CountryFlag country="gb" size="normal" /> 
           </li>
           <li 
-            v-if="movie.original_language !== 'en' && movie.original_language !== 'it'" >Lingua originale: {{movie.original_language}} 
+            v-if="movie.original_language !== 'en' && movie.original_language !== 'it'" ><span>Lingua originale:</span> {{movie.original_language}} 
           </li>
-          <li class=" special"
+          <li 
+            v-if="movie.overview !== ''"
+            class="special"
           > <span>Trama:</span> {{movie.overview}}</li>
-          <li class="mt-2">
-            <i class="fas fa-star"
-              v-for="index in Math.round(movie.vote_average/2)"
-              :key="index"
-            >
-            </i>
-          </li>     
+          <li 
+            v-else
+          > <span>Trama:</span> Nessuna descrizione trovata</li>
+          <li class="mt-3">
+            <span>Voto:</span>
+            <div class="stars">
+              <div class="empty">
+                <div class="inner">
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
+              <div class="solid"
+                :style="`width:${8.9*movie.vote_average}px`"
+              >
+                <div class="inner">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+            </div>
+          </li>
+
         </ul>
+
       </div>
+
     </div>
+
   </div>
 </template>
 
 <script>
-import CountryFlag from 'vue-country-flag'
+import CountryFlag from 'vue-country-flag'; //utilizzo bandierine da country flag
 
 export default {
   name: 'Card',
@@ -56,6 +85,7 @@ export default {
     movie: Object
   },
   methods:{
+    //funzione per il passaggio delle immagini
     getImg(img_path){
       let imgURL = this.baseURL+img_path;
       return imgURL;
@@ -69,9 +99,9 @@ export default {
   .flip-card {
     background-color: transparent;
     width: 280px;
-    height: 360px;
+    height: 380px;
     perspective: 1000px;
-    margin: 3rem;
+    margin: 2.5rem;
   }
 
   .flip-card-inner {
@@ -80,9 +110,8 @@ export default {
     height: 100%;                     
     transition: transform 1.5s;
     transform-style: preserve-3d;
-    box-shadow: 0 5px 10px 0 rgba(0,0,0,0.8);
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.8);
     border-radius: 18px;
-
   }
 
   .flip-card:hover .flip-card-inner {
@@ -99,39 +128,73 @@ export default {
   }
 
   .flip-card-front {
-    background-color: #bf8484;
+    background-color: #9c9797;
     color: black;
-
     img{
-      width:280px;
-      height:360px;
+      width: 280px;
+      height: 380px;
       border-radius: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.39);
     }
   }
 
   .flip-card-back {
     background-color: rgba(0, 0, 0, 0.9);
+    border: 2px solid rgb(255, 255, 255);
     color: white;
     padding: 0.8rem;
     transform: rotateY(180deg);
+    text-align: left;
     ul{
       height: 100%;
     }
     li{
       list-style: none;
       width: 100%;
-      height: 50px;
+      height: 70px;
+      font-size: 1rem;
       & span:first-child{
         font-weight: bold;
         color: rgb(245, 47, 47);
       }
     }
     .special{
-      height: 135px;
       overflow-y: scroll;
+      height: 165px;
       span{
         font-weight: bold;
       } 
+    }
+    .stars{
+      position:relative;
+      margin-left: 5px;
+      .empty, .solid{
+        position: absolute;
+        top: -25px;
+        left: 75px;
+        overflow: hidden;
+      }
+      .inner{
+        width: 90px;
+      }
+    }
+  }
+
+  //cambio la misura delle card sotto 1000px
+  @media screen and(max-width: 992px){
+    .flip-card {
+      width: 240px;
+      height: 320px;
+    }
+    .flip-card-front img{
+      width: 240px;
+      height: 320px;
+    }
+    .flip-card-back li{
+      font-size: 0.85rem;
+    }
+    .stars{
+      margin-top: 5px;
     }
   }
 </style>

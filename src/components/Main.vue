@@ -1,7 +1,7 @@
 <template>
   
   <section class="d-flex flex-column align-items-center">
-    <h1>{{title[type]}} {{list.length}} </h1>
+    <h1 class="mt-4">{{title[type]}} {{list.length}} </h1>
     
     <div class="d-flex justify-content-evenly flex-wrap">    
       <Card 
@@ -30,7 +30,7 @@ export default {
     return{
       title:{
         'movie': 'Film trovati:',
-        'tv': 'Serie-tv trovate:'
+        'tv': 'Serie-TV trovate:'
       }
     }
   },

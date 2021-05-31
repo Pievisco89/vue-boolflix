@@ -1,12 +1,14 @@
 <template>
   <div id="app" class="text-center">
+    <!-- richiamo la funzione startSearch al click sui bottoni -->
     <Header 
       @startSearch="startSearch"
     />
 
+    <!-- da visualizzare in assenza di risultati -->
     <h1
       class="m-5"
-      v-if="resultList.movie.length === 0 && resultList.movie.length === 0"
+      v-if="resultList.movie.length === 0 && resultList.tv.length === 0"
     >Nessun risultato trovato</h1>
 
 
@@ -22,10 +24,6 @@
       :list="resultList.tv"
     />
 
-    <!-- <Default 
-      v-if="loading"
-    /> -->
-
   </div>
 </template>
 
@@ -33,7 +31,6 @@
 import axios from 'axios';
 import Header from './components/Header.vue';
 import Main from './components/Main.vue';
-//import Default from './components/Default.vue';
 
 
 export default {
@@ -41,12 +38,10 @@ export default {
   components: {
     Header,
     Main,
-    //Default
 
   },
   data(){
-    return{
-      //loading: true,    
+    return{    
       apiURL: 'https://api.themoviedb.org/3/search/',
       apiKey: 'fd1b976883e42bd0bfd6acabdc7587a9',
       apiQuery: '',
@@ -57,7 +52,7 @@ export default {
     }
   },
   methods:{
-
+    //in base al bottone cliccato partono chiamate API
     startSearch(obj){
       this.resetList();
       if(obj.type === 'all'){
@@ -68,11 +63,13 @@ export default {
       }
     },
 
+    //funzione per resettare i due array prima di fare una nuova chiamata
     resetList(){
       this.resultList.movie = [],
       this.resultList.tv = []
     },
 
+    //chiamata Api che avviene al momento del click sul bottone
     callAPI(query, type){
       if(query !== ''){
         axios.get(this.apiURL+type,{
@@ -84,7 +81,6 @@ export default {
         })
         .then(resp => {
           this.resultList[type] = resp.data.results;
-          console.log(this.resultList);
         })
         .catch(err => {
           console.log(err);
@@ -94,6 +90,36 @@ export default {
     },
 
   },
+  //creo una visualizzazione di base con film e serie più popolari
+  created(){ 
+    let type = 'movie'
+    axios.get('https://api.themoviedb.org/3/movie/popular',{
+      params:{
+        api_key: this.apiKey,
+        language: 'it-IT'
+      }
+    })
+    .then(resp => {
+      this.resultList[type] = resp.data.results;       
+    })
+    .catch(err => {
+      console.log(err);
+    })
+
+    let typeTv = 'tv'
+    axios.get('https://api.themoviedb.org/3/tv/popular',{
+      params:{
+        api_key: this.apiKey,
+        language: 'it-IT'
+      }
+    })
+    .then(resp => {
+      this.resultList[typeTv] = resp.data.results;       
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
   
   
 }
